@@ -1,0 +1,57 @@
+<!DOCTYPE Html>
+<html lang="en">
+    <head>
+        <title>Eloquent JavaScript</title>
+        <meta name="author" content="Xiaoda Wang">
+    </head>
+    <body>
+        <h1>Chapter 2: Chess board</h1>
+        <p>Write a program that creates a string that represents an 8 × 8 grid, using
+            newline characters to separate lines. At each position of the grid there
+            is either a space or a “#” character. The characters should form a chess
+            board.</p>
+        <p>Passing this string to console.log should show something like this:</p>
+        <p> # # # #</p>
+        <p># # # # </p>
+        <p> # # # #</p>
+        <p># # # # </p>
+        <p> # # # #</p>
+        <p># # # # </p>
+        <p> # # # #</p>
+        <p># # # # </p>
+        <p>When you have a program that generates this pattern, define a variable
+            size = 8 and change the program so that it works for any size , outputting
+            a grid of the given width and height.</p>
+        <script>
+            function displayBoard () {
+                let size = 8;
+                const white = " ";
+                const dark = "#";
+                for (let length=0; length<size; length++) {
+                    let row = "";
+                    if (length%2==0) {
+                        for (let widthEven=0; widthEven<size; widthEven++) {
+                            if (widthEven%2==0) {
+                                row += white;
+                            } else if (widthEven%2!=0) {
+                                row += dark;
+                            }
+                        }
+                        console.log(row);
+                    } else if (length%2!=0) {
+                        for (let widthOdd=0; widthOdd<size; widthOdd++) {
+                            if (widthOdd%2==0) {
+                                row += dark;
+                            } else if (widthOdd%2!=0) {
+                                row += white;
+                            }
+                        }
+                        console.log(row);
+                    }
+                }
+            }
+
+            displayBoard();
+        </script>    
+    </body>
+</html>
