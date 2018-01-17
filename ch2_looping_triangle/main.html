@@ -1,0 +1,29 @@
+<!DOCTYPE Html>
+<html lang="en">
+    <head>
+        <title>Eloquent JavaScript</title>
+        <meta name="author" content="Xiaoda Wang">
+    </head>
+    <body>
+        <h1>Chapter 2: Looping a Triangle</h1>
+        <p>Write a loop that makes seven calls to console.log to output the following</p>
+                <p>triangle:</p>
+                <p>#</p>
+                <p>##</p>
+                <p>###</p>
+                <p>####</p>
+                <p>#####</p>
+                <p>######</p>
+                <p>#######</p>
+        <script>
+            function loopTriangle () {
+                let triangleLayer = "";
+                for (let i=0; i<7; i++) {
+                    console.log(triangleLayer += "#");
+                }
+            }
+
+            loopTriangle();
+        </script>    
+    </body>
+</html>
