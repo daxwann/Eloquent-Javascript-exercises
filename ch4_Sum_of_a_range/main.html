@@ -22,7 +22,32 @@
             should return [1, 3, 5, 7, 9]. Make sure it also works with negative step
             values so that range(5, 2, -1) produces [5, 4, 3, 2].</p>
         <script>
-            
+            function range(start, end, step) {
+                let rangeArray = [];
+                if (step == undefined) {
+                    step = 1;
+                }
+                if (start <= end) {
+                    for (let i = start; i <= end; i += step) {
+                        rangeArray.push(i);
+                    }
+                } else {
+                    for (let i = start; i >= end; i += step) {
+                        rangeArray.push(i);
+                    }
+                }
+                return rangeArray;
+            }
+
+            function sum(range) {
+                let sum = 0;
+                for (let i = 0; i < range.length; i++) {
+                    sum += range[i];
+                }
+                return sum;
+            }
+
+            console.log(sum(range(1, 10)));
         </script>    
     </body>
 </html>
