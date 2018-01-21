@@ -1,0 +1,42 @@
+<!DOCTYPE Html>
+<html lang="en">
+    <head>
+        <title>Eloquent JavaScript</title>
+        <meta name="author" content="Xiaoda Wang">
+    </head>
+    <body>
+        <h1>Chapter 4: Reversing an array</h1>
+        <p>Arrays have a method reverse , which changes the array by inverting the
+            order in which its elements appear. For this exercise, write two functions,
+            reverseArray and reverseArrayInPlace . The first, reverseArray , takes an array
+            as argument and produces a new array that has the same elements in
+            the inverse order. The second, reverseArrayInPlace , does what the reverse
+            method does: it modifies the array given as argument in order to reverse
+            its elements. Neither may use the standard reverse method.</p>
+        <p>Thinking back to the notes about side effects and pure functions in
+            the previous chapter, which variant do you expect to be useful in more
+            situations? Which one is more efficient?</p>
+        <script>
+            let myArray=[1, 2, 3, 4, 5];
+
+            function reverseArray(originalArray) {
+                let newArray=[];
+                 
+                for (let index=originalArray.length-1; index>=0; index--) {
+                    newArray.push(originalArray[index]);
+                }
+                return newArray;
+            }
+            
+            function reverseArrayInPlace(originalArray) {
+                for (let index=0; index<originalArray.length; index++) {
+                    originalArray[index]=originalArray[originalArray.length-(index+1)];
+                }
+                return originalArray;
+            }
+
+            console.log(reverseArray(myArray));
+            console.log(reverseArrayInPlace(myArray));
+        </script>    
+    </body>
+</html>
