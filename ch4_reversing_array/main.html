@@ -30,7 +30,7 @@
             
             function reverseArrayInPlace(originalArray) {
                 for (let index=0; index<originalArray.length; index++) {
-                    originalArray[index]=originalArray[originalArray.length-(index+1)];
+                    originalArray.splice(index, 0, originalArray.pop());
                 }
                 return originalArray;
             }
