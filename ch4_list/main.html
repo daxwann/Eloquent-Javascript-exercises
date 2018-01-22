@@ -1,0 +1,94 @@
+<!DOCTYPE Html>
+<html lang="en">
+    <head>
+        <title>Eloquent JavaScript</title>
+        <meta name="author" content="Xiaoda Wang">
+    </head>
+    <body>
+        <h1>Chapter 4: A list</h1>
+        <p>Objects, as generic blobs of values, can be used to build all sorts of data
+            structures. A common data structure is the list (not to be confused with
+            the array). A list is a nested set of objects, with the first object holding
+            a reference to the second, the second to the third, and so on.</p>
+        <p>A nice thing about lists is that they can share parts of their structure.
+            For example, if I create two new values {value: 0, rest: list} and {value:
+            -1, rest: list} (with list referring to the variable defined earlier), they are both independent lists, but they share the structure that makes up
+            their last three elements. In addition, the original list is also still a valid
+            three-element list.</p>
+        <p>Write a function arrayToList that builds up a data structure like the
+            previous one when given [1, 2, 3] as argument, and write a listToArray
+            function that produces an array from a list. Also write the helper
+            functions prepend , which takes an element and a list and creates a new
+            list that adds the element to the front of the input list, and nth , which
+            takes a list and a number and returns the element at the given position
+            in the list, or undefined when there is no such element.</p>
+        <p>If you haven’t already, also write a recursive version of nth.</p>
+        <script>
+            //Display original list
+            let myList = {
+                value: 1,
+                rest: {
+                    value: 2,
+                    rest: {
+                        value: 3,
+                        rest: null
+                    }
+                }
+            };
+            console.log(myList);
+
+            //Display original array
+            let myArray = [1, 2, 3];
+            console.log(myArray);
+
+            //Function that converts original array to a list
+            function arrayToList(myArray) {
+                let newList={};
+                let element="";
+                for (let index=myArray.length-1; index>=0; index--) {
+                    element = myArray[index];
+                    newList = prepend(element, newList);
+                }
+                return newList;   
+            }
+            console.log(arrayToList(myArray));
+
+            //Function that converts original list to an array
+            function listToArray(myList) {
+                let newArray = [];
+                for (let index=0;;index++) {
+                    if (nth(myList, index)==undefined) {
+                        break;
+                    } else {
+                        newArray[index]=nth(myList, index);
+                    }
+                }
+                return newArray;
+            }
+            console.log(listToArray(myList));
+
+            //Helper function that creates new list with input value and old list
+            function prepend(element, oldList) {
+                let newList = {};
+                newList.value = element;
+                if (!("value" in oldList)) {
+                    newList.rest=null;
+                } else {
+                    newList.rest=oldList;
+                }
+                return newList;
+            }
+
+            //Helper function to return the value of a list in the position number entered
+            function nth(list, posNumber) {
+                if (list==null || list.value==undefined) {
+                    return undefined;
+                } else if (posNumber==0) {
+                    return list.value;
+                } else {
+                    return nth(list.rest, posNumber-1);
+                }
+            }
+        </script>    
+    </body>
+</html>
