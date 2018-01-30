@@ -62,47 +62,39 @@ var ANCESTRY_FILE = JSON.stringify([
 
 var ancestry = JSON.parse(ANCESTRY_FILE);
 
-//group ancesters by century
-function groupByCentury(ancestryArray) {
-    let byCentury = {};
-    ancestryArray.forEach(function(person) {
-        let century = Math.ceil(person.died/100);
-        byCentury[century] = [];
-    })
-    for (century in byCentury) {
-        byCentury[century] = ancestryArray.filter(function(person) {
-            return Math.ceil(person.died/100) == century;
-        })
-    }
-    return byCentury;
-}
 
-//find average age expectancy of ancestors grouped by century
-function findAverageAge(ancestryArray) {
-    let byCentury = {};
-    ancestryArray.forEach(function(person) {
-        let century = Math.ceil(person.died/100);
-        byCentury[century] = 0;
-    })
-    for (century in byCentury) {
-        byCentury[century] = average(ancestryArray.filter(function(person) {
-            return Math.ceil(person.died/100) == century;
-        }).map(function(person) {
-            return person.died-person.born;
-        }));
-    }
-    return byCentury;
-}
-
-//average the elements of an array
+//Average the elements of an array
 function average(array) {
     function plus(a, b) {return a+b;}
     return array.reduce(plus)/array.length;
 }
 
-//display result
-console.log(findAverageAge(ancestry));
+//Organize elements into arrays according to a common property 
+function groupBy(array, groupFunction) {
+    let group = {};
+    array.forEach(function(element) {
+        let groupName = groupFunction(element);
+        if (groupName in group) {
+            group[groupName].push(element);
+        } else {
+            group[groupName] = [element];
+        }
+    });
+    return group;
+}
 
+//Find which century each ancestor lived in
+let groupByCentury = groupBy(ancestry, function(person) {
+    return Math.ceil(person.died/100);
+})
+
+//display results
+for (var century in groupByCentury) {
+    let ages = groupByCentury[century].map(function(person) {
+        return person.died-person.born;
+    });
+    console.log(century + "th century: " + average(ages));
+}
         </script>    
     </body>
 </html>
