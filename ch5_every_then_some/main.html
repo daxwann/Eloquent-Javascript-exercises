@@ -1,0 +1,63 @@
+<!DOCTYPE Html>
+<html lang="en">
+    <head>
+        <title>Eloquent JavaScript</title>
+        <meta name="author" content="Xiaoda Wang">
+    </head>
+    <body>
+        <h1>Chapter 5: Every and then some</h1>
+        <p>Arrays also come with the standard methods every and some . Both take a
+            predicate function that, when called with an array element as argument,
+            returns true or false. Just like &amp;&amp; returns a true value only when the
+            expressions on both sides are true, every returns true only when the
+            predicate returns true for all elements of the array. Similarly, some returns
+            true as soon as the predicate returns true for any of the elements. They
+            do not process more elements than necessary—for example, if some finds
+            that the predicate holds for the first element of the array, it will not look
+            at the values after that.</p>
+        <p>Write two functions, every and some, that behave like these methods,
+            except that they take the array as their first argument rather than being
+            a method.</p>
+        <script>
+            let testArray = [1, 2, 3, 4, 5, 6, 7, -1, 8, 9, 10];
+
+            //Check if every element in the array pass the test
+            function every(array, test) {
+                let validity = true;
+                for (let i=0; i<array.length; i++) {
+                    if (!test(array[i])) {
+                        validity=false;
+                        break;
+                    }
+                }
+                return validity;
+            }
+
+            //Check if some element in the array pass the test
+            function some(array, test) {
+                let validity = false;
+                for (let i=0; i<array.length; i++) {
+                    if (test(array[i])) {
+                        validity=true;
+                        break;
+                    }
+                }
+                return validity;
+            }
+
+            //test if element is positive
+            function positive(element) {
+                if (element > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            //display results
+            console.log(every(testArray, positive));
+            console.log(some(testArray, positive));
+
+        </script>    
+    </body>
+</html>
